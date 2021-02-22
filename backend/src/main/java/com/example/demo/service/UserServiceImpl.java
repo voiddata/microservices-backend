@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(User user) throws UserAlreadyExistsException {
 		
-		User fetchedUser = userRepository.findByEmailAndPassword(user.getEmail(), user.getPassword());
+		User fetchedUser = userRepository.findByEmailAndPasswordAndRole(user.getEmail(), user.getPassword(), user.getRole());
 		
 		if (fetchedUser == null) {
 			throw new UserAlreadyExistsException("Invalid User!");

@@ -10,4 +10,5 @@ public interface UserController {
 
 	EntityModel<Status> register(User user);
 	EntityModel<LoginStatus> login(User user);
+	
 }
