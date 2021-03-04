@@ -21,6 +21,8 @@ public class User {
 	private String email;
 	private String password;
 	private String role;
+	private int managerId;
+	
 	
 	public int getId() {
 		return id;
@@ -57,6 +59,12 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public int getManagerId() {
+		return managerId;
+	}
+	public void setManagerId(int managerId) {
+		this.managerId = managerId;
 	}
 	
 	@Override
