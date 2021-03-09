@@ -1,15 +1,17 @@
 package com.example.genericservice.repository;
 
+import java.util.List;
+
 import com.example.genericservice.entity.User;
 
 public interface GenericRepository {
 
-	User findByEmail(String email);
+	List<User> findByEmail(String email);
 
-	User findById(int managerId);
+	List<User> findById(int managerId);
 
 	Object save(Object obj);
 	
-	User findByEmailAndPasswordAndRole(String email, String password, String role);
+	List<User> findByEmailAndPasswordAndRole(String email, String password, String role);
 
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +18,6 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 
 @RestController
-@CrossOrigin
 public class ManagerControllerImpl implements ManagerController {
 
 	@Autowired
@@ -30,7 +28,7 @@ public class ManagerControllerImpl implements ManagerController {
 	
 	@Override
 	@GetMapping("/getRequestList/{email}")
-	@CircuitBreaker(name = "default", fallbackMethod = "hello")
+	@CircuitBreaker(name = "default")
 	public @ResponseBody List<LeaveRequestList> getRequestList(@PathVariable("email") String email) {
 		
 		return managerService.fetchRequestList(email);
@@ -38,7 +36,7 @@ public class ManagerControllerImpl implements ManagerController {
 
 	@Override
 	@PostMapping("/approve")
-	@CircuitBreaker(name = "default", fallbackMethod = "hello")
+	@CircuitBreaker(name = "default")
 	public void approve(@RequestBody int recordId) {
 		
 		managerService.approve(recordId);

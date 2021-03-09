@@ -1,5 +1,7 @@
 package com.example.genericservice.repository;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +17,21 @@ public class GenericRepositoryImpl implements GenericRepository {
 	
 	
 	@Override
-	public User findByEmail(String email) {
+	public List<User> findByEmail(String email) {
 		
 		return entityManager
 				.createQuery("select u from User u where u.email = :email", User.class)
 				.setParameter("email", email)
-				.getSingleResult();
+				.getResultList();
 	}
 
 	@Override
-	public User findById(int managerId) {
+	public List<User> findById(int managerId) {
 		
 		return entityManager
 				.createQuery("select u from User u where u.id = :id", User.class)
 				.setParameter("id", managerId)
-				.getSingleResult();
+				.getResultList();
 		
 	}
 
@@ -40,13 +42,13 @@ public class GenericRepositoryImpl implements GenericRepository {
 	}
 
 	@Override
-	public User findByEmailAndPasswordAndRole(String email, String password, String role) {
+	public List<User> findByEmailAndPasswordAndRole(String email, String password, String role) {
 		return entityManager
 				.createQuery("select u from User u where u.email = :email and u.password = :password and u.role = :role", User.class)
 				.setParameter("email", email)
 				.setParameter("password", password)
 				.setParameter("role", role)
-				.getSingleResult();
+				.getResultList();
 	}
 
 }

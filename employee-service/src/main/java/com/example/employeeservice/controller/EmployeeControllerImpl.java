@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +23,6 @@ import com.example.employeeservice.service.EmployeeService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @RestController
-@CrossOrigin
 public class EmployeeControllerImpl implements EmployeeController {
 
 	@Autowired
@@ -35,7 +33,7 @@ public class EmployeeControllerImpl implements EmployeeController {
 
 	@Override
 	@PostMapping("/requestLeave")
-	@CircuitBreaker(name = "default", fallbackMethod = "hello")
+	@CircuitBreaker(name = "default")
 	public @ResponseBody EntityModel<Status> requestLeave(@RequestBody Leave leave) {
 
 		Status status = new Status();
@@ -57,7 +55,7 @@ public class EmployeeControllerImpl implements EmployeeController {
 
 	@Override
 	@GetMapping("/getLeaveDates/{email}")
-	@CircuitBreaker(name = "default", fallbackMethod = "hello")
+	@CircuitBreaker(name = "default")
 	public @ResponseBody List<LocalDate> getLeaveDates(@PathVariable("email") String email) {
 
 		return employeeService.fetchLeaveDates(email);
@@ -65,7 +63,7 @@ public class EmployeeControllerImpl implements EmployeeController {
 
 	@Override
 	@GetMapping("/getHistory/{email}")
-	@CircuitBreaker(name = "default", fallbackMethod = "hello")
+	@CircuitBreaker(name = "default")
 	public @ResponseBody List<LeaveHistory> getHistory(@PathVariable("email") String email) {
 
 		return employeeService.fetchHistory(email);

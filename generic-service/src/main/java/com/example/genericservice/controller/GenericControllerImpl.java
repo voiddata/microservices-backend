@@ -3,7 +3,6 @@ package com.example.genericservice.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,7 +23,6 @@ import com.example.genericservice.entity.User;
 
 
 @RestController
-@CrossOrigin
 public class GenericControllerImpl implements GenericController {
 
 	@Autowired
@@ -35,7 +33,7 @@ public class GenericControllerImpl implements GenericController {
 	
 	@Override
 	@PostMapping("/register")
-	@CircuitBreaker(name = "default", fallbackMethod = "hello")
+	@CircuitBreaker(name = "default")
 	public @ResponseBody EntityModel<Status> register(@RequestBody User user) {
 		
 		Status status = new Status();
@@ -57,7 +55,7 @@ public class GenericControllerImpl implements GenericController {
 
 	@Override
 	@PostMapping("/login")
-	@CircuitBreaker(name = "default", fallbackMethod = "hello")
+	@CircuitBreaker(name = "default")
 	public @ResponseBody EntityModel<LoginStatus> login(@RequestBody User user) {
 		
 		LoginStatus loginStatus = new LoginStatus();
